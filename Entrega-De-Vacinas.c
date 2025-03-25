@@ -5,6 +5,7 @@
 
 int cityAmount;
 
+// Creates a function to calculate the distance between two points.
 int calculateDistance(int x1, int y1, int x2, int y2)
 {
     int dx = x2 - x1;
@@ -24,6 +25,7 @@ int sumDistances(int distanceMatrix[][cityAmount], int city[], int n)
     return distance;
 }
 
+// Uses the function above to calculate all possible sums of distances between cities, returning the sequence with the lowest distance.
 void *permute(int matrix[][cityAmount], int cities[], int beginning, int end, int *lowestDistance, int bestSequence[])
 {
     if (beginning == end)
@@ -57,6 +59,7 @@ void *permute(int matrix[][cityAmount], int cities[], int beginning, int end, in
 
 int main()
 {
+    // Chooses the file to open based on user input.
     FILE *citiesInput;
     char buffer[255];
     int file;
@@ -87,6 +90,7 @@ int main()
         int orderOfCities[cityAmount];
     };
 
+    // Creates a matrix with each city's coordinates.
     int **listOfCities = NULL;
     listOfCities = (int **)malloc(sizeof(int *) * cityAmount);
     if (listOfCities == NULL)
@@ -103,6 +107,7 @@ int main()
         }
     }
 
+    // Takes the coordinates from the chosen file to add to listOfCities matrix.
     int indexOfY;
     char *takeCoordinates;
     for (int i = 0; i < cityAmount; i++)
@@ -125,6 +130,7 @@ int main()
     int choice;
     printf("Precise result (not recommended for routes with more than 10 cities):1\nImprecise result (recommended for routes with large amounts of cities):2\n");
     scanf("%d", &choice);
+    // Uses the permute function to calculate the best possible sequence, then returns the total distance.
     if (choice == 1)
     {
         int distanceMatrix[cityAmount][cityAmount];
@@ -160,6 +166,7 @@ int main()
         }
         printf("%d", 1);
     }
+    // Uses the logic from Dijkstra's algorithm to calculate the best sequence based on the immediately closest city, then returns the total distance.
     else if (choice == 2)
     {
         unsigned long long int totalDistance = 0, lowestDistanceBetweenCities = 1000000000000, distance;
@@ -176,10 +183,8 @@ int main()
 
         while (visitedCities != cityAmount)
         {
-
             for (int j = 0; j < cityAmount; j++)
             {
-
                 distance = calculateDistance(listOfCities[originCity][0], listOfCities[originCity][1], listOfCities[j][0], listOfCities[j][1]);
 
                 if ((distance < lowestDistanceBetweenCities) && (j != originCity) && (j != lastVisitedCity))
@@ -239,7 +244,7 @@ int main()
         }
         printf("%d", firstCity + 1);
     }
-
+    // End of program.
     fclose(citiesInput);
     for (int i = 0; i < cityAmount; i++)
     {
