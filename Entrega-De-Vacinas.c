@@ -104,10 +104,8 @@ int takeUserInput(int fileAmount)
     }
     else
     {
-        // Informa o usuário sobre a entrada inválida (não inteiro) e limpa o buffer de entrada.
         // Informs the user about the invalid (non integer) input and clears the input buffer.
         printf("Invalid input. Please enter an integer.\n");
-        // Limpa o buffer de entrada para evitar loops infinitos com entradas não numéricas.
         // Clears the input buffer to avoid infinite loops with non-numeric inputs.
         while (getchar() != '\n')
             ;
