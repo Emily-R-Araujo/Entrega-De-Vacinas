@@ -365,5 +365,5 @@ int main()
         free(listOfCities[i]);
     }
     free(listOfCities);
-    return 0; // Indica que o programa terminou com sucesso.
+    return 0; // Indicates that the program was successfully completed.
 }
